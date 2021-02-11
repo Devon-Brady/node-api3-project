@@ -30,6 +30,7 @@ function insert(user) {
   return db('users')
     .insert(user)
     .then(ids => {
+      console.log(ids);
       return getById(ids[0]);
     });
 }
@@ -37,7 +38,10 @@ function insert(user) {
 function update(id, changes) {
   return db('users')
     .where({ id })
-    .update(changes);
+    .update(changes)
+    .then(ids => {
+      return getById(id);
+    });
 }
 
 function remove(id) {
